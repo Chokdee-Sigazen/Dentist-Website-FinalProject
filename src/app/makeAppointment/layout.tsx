@@ -1,4 +1,4 @@
-export default function MakeAppt ({children} : {children:React.ReactNode}) {
+export default function MakeApptLayout ({children} : {children:React.ReactNode}) {
     return (
         <div>            
             {children}

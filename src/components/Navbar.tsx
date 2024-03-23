@@ -8,7 +8,7 @@ export default function Navbar() {
         <Link href="/makeAppointment" className="p-2 text-white font-bold hover:underline">
           Create Appointment
         </Link>
-        <Link href="/" className="p-2 text-white font-bold hover:underline">
+        <Link href="/dentistList" className="p-2 text-white font-bold hover:underline">
           Dentist List
         </Link>
         <Link href="/" className="p-2 text-white font-bold hover:underline">
