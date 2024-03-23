@@ -32,7 +32,7 @@ const cardList: CardInfoProps[] = [
 
 export default function CardList() {
   return (
-    <div className="flex w-full pt-10  space-x-3">
+    <div className="flex  pt-10 w-[85%] mx-auto  space-x-3">
       {cardList.map((card, index) => {
         return <CardInfo key={index} {...card} />;
       })}

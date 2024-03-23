@@ -21,6 +21,7 @@ export default function RootLayout({
         <Navbar></Navbar>
         <div className="h-14"></div>
         {children}
+        <div className="h-[30vh]  bg-[#AA6669]"></div>
       </body>
     </html>
   );
