@@ -4,8 +4,8 @@ export default function Navbar() {
   return (
     <section className="fixed z-50 top-0 left-0 bg-[#61C0BF] justify-between flex h-14 w-full py-2 px-6">
       <div className="h-10 w-24 p-2 bg-[#72A3A2]"></div>
-      <section className="flex space-x-2">
-        <Link href="/" className="p-2 text-white font-bold hover:underline">
+      <section className="flex space-x-2 text-[8pt] md:text-[10pt] lg:text-[12pt] items-center">
+        <Link href="/makeAppointment" className="p-2 text-white font-bold hover:underline">
           Create Appointment
         </Link>
         <Link href="/" className="p-2 text-white font-bold hover:underline">
@@ -17,7 +17,7 @@ export default function Navbar() {
 
         <Link
           href="/"
-          className="h-10 p-2 font-bold hover:bg-[#7db4b3] transition-colors duration-200 rounded-full text-white px-5  bg-[#72A3A2]"
+          className="flex items-center justify-center h-10 p-2 font-bold hover:bg-[#7db4b3] transition-colors duration-200 rounded-full text-white px-5 bg-[#72A3A2]"
         >
           Sign up / Sign in
         </Link>
