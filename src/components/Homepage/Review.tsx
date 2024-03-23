@@ -1,4 +1,6 @@
+"use client";
 import { Rating } from "@mui/material";
+import { motion } from "framer-motion";
 
 const reviewData: {
   name: string;
@@ -32,7 +34,8 @@ export default function Review() {
           <div className=" space-y-5">
             {reviewData.map((review, index) => {
               return (
-                <section
+                <motion.section
+                  whileHover={{ x: 10 }}
                   key={index}
                   className={` flex px-10 py-2 rounded-2xl w-full shadow-lg bg-gradient-to-l ${
                     index % 2 == 0
@@ -61,7 +64,7 @@ export default function Review() {
                       readOnly
                     />
                   </div>
-                </section>
+                </motion.section>
               );
             })}
           </div>
