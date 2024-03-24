@@ -13,7 +13,14 @@ export default function AboutUs() {
           <p className="text-[#744143] text-[32px] font-bold text-start">
             ที่อยู่คลินิค
           </p>
-          <div className=" h-[60vh] w-full bg-[#B5686B] mt-10 mb-5 rounded-xl"></div>
+          <div className=" h-[60vh] w-full bg-[#B5686B] mt-10 mb-5 rounded-xl">
+            <iframe className="rounded-xl"
+              width="100%"
+              height="600"
+              title="Clinic Map"
+              src={`https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(Your+Business+Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed`}
+              />
+          </div>
           <p className="text-[#744143] text-[25px]  text-start">
             99/11 หมู่ 1 ต.บางเสาธง อ.เมือง จ.สมุทรปราการ 10270
           </p>
