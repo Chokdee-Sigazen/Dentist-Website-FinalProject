@@ -2,9 +2,8 @@ import AboutUs from "@/components/Homepage/AboutUs";
 import Archive from "@/components/Homepage/Archive";
 import Banner from "@/components/Homepage/Banner";
 import CardList from "@/components/Homepage/CardList";
-import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="bg-[#FFB6B9] min-h-[200vh]">
       <Banner></Banner>
