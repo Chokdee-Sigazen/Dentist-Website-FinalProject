@@ -2,7 +2,6 @@ import AboutUs from "@/components/Homepage/AboutUs";
 import Archive from "@/components/Homepage/Archive";
 import Banner from "@/components/Homepage/Banner";
 import CardList from "@/components/Homepage/CardList";
-import getUsers from "@/lib/getUsers";
 
 export default async function Home() {
   return (
