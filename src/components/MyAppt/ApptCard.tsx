@@ -4,6 +4,7 @@ export interface ApptInfoProps {
     work: string| null;
     dentist : string;
     createdAt: Date;
+    finish: boolean;
 }
 
 export default async function ApptCard(props: ApptInfoProps) {
@@ -21,6 +22,7 @@ export default async function ApptCard(props: ApptInfoProps) {
                 <span className="font-bold">หัวข้อ : </span>{dentistWork} <br></br>
                 <span className="font-bold">หมอ : </span>{dentistName} <br></br>
                 <span className="font-bold">สร้างเมื่อ : </span>{createdDate} <br></br>
+                <span className="font-bold">เสร็จ : </span>{props.finish ? "เสร็จแล้ว" : "ยังไม่เสร็จ"} <br></br>
             </div>
         </div>
     );

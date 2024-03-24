@@ -4,10 +4,11 @@ import ApptCard , { ApptInfoProps } from "./ApptCard";
 
 export default async function ApptPanel() {
 
-  let appointment = await getAppointments();
-  const appointmentData: ApptInfoProps[] = appointment.data;
-  console.log(appointmentData);
-  const dentistData = getDentist();
+  let appointments = await getAppointments();
+  const appointmentData: ApptInfoProps[] = appointments.data.filter(
+    (appointment: ApptInfoProps) => !appointment.finish
+  );
+
   
     return (
         <div className="flex flex-col justify-center w-[80%] mx-auto py-2">
