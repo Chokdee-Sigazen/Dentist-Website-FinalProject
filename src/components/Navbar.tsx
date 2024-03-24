@@ -16,7 +16,7 @@ export default function Navbar() {
         </Link>
 
         <Link
-          href="/"
+          href="/login"
           className="flex items-center justify-center h-10 p-2 font-bold hover:bg-[#7db4b3] transition-colors duration-200 rounded-full text-white px-5 bg-[#72A3A2]"
         >
           Sign up / Sign in
