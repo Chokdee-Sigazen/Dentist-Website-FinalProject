@@ -2,16 +2,16 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <section className="fixed z-50 top-0 left-0 bg-[#61C0BF] justify-between flex h-14 w-full py-2 px-6">
+    <section className="fixed z-50 top-0 left-0 bg-[#FFFFFF] justify-between flex h-14 w-full py-2 px-6">
       <div className="h-10 w-24 p-2 bg-[#72A3A2]"></div>
       <section className="flex space-x-2 text-[8pt] md:text-[10pt] lg:text-[12pt] items-center">
-        <Link href="/makeAppointment" className="p-2 text-white font-bold hover:underline">
+        <Link href="/makeAppointment" className="p-2 text-[#835A5C] font-bold hover:underline">
           Create Appointment
         </Link>
-        <Link href="/dentistList" className="p-2 text-white font-bold hover:underline">
+        <Link href="/dentistList" className="p-2 text-[#835A5C] font-bold hover:underline">
           Dentist List
         </Link>
-        <Link href="/myAppointment" className="p-2 text-white font-bold hover:underline">
+        <Link href="/myAppointment" className="p-2 text-[#835A5C] font-bold hover:underline">
           My Appointment
         </Link>
 

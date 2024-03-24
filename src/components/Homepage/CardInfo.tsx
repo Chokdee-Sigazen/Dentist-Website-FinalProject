@@ -13,7 +13,7 @@ export interface CardInfoProps {
 export default function CardInfo(props: CardInfoProps) {
   return (
     <motion.div
-      className=" h-[24rem] w-[33%] bg-[#FFB6B9] rounded-2xl"
+      className="card h-[23rem] w-[33%] bg-[#f6f6f6] rounded-2xl shadow-xl"
       whileHover={{ y: -7 }}
     >
       <div
@@ -28,7 +28,7 @@ export default function CardInfo(props: CardInfoProps) {
         </p>
         <Link
           href={props.link}
-          className=" rounded-lg bg-[#A06264] text-[14px] hover:bg-[#be7477] transition-colors duration-200  text-white font-bold p-2 px-4"
+          className=" rounded-lg bg-[#A06264] text-[14px] hover:bg-[#be7477] transition-colors duration-200  text-white font-bold p-2 px-5"
         >
           อ่านเพิ่มเติม
         </Link>

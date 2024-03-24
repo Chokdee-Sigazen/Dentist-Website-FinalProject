@@ -39,8 +39,8 @@ export default function Review() {
                   key={index}
                   className={` flex px-10 py-2 rounded-2xl w-full shadow-lg bg-gradient-to-l ${
                     index % 2 == 0
-                      ? "bg-[#FFA4A8] text-[#79494B] from-[#FF7177]"
-                      : "bg-[#A4E0DF] text-[#326665] from-[#83C0BF]"
+                      ? "bg-[#ffffff] text-[#79494B] from-[#f1f1f1]"
+                      : "bg-[#ffffff] text-[#79494B] from-[#f1f1f1]"
                   }`}
                 >
                   <div
@@ -59,7 +59,7 @@ export default function Review() {
                       name="read-only"
                       value={review.rating}
                       className={`${
-                        index % 2 == 0 ? "text-[#79494B]" : "text-[#326665]"
+                        index % 2 == 0 ? "text-[#79494B]" : "text-[#79494B]"
                       }`}
                       readOnly
                     />

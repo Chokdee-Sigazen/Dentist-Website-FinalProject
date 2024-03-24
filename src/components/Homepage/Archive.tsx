@@ -17,7 +17,7 @@ export default function Archive() {
   return (
     <div className="sticky top-10 w-[85%] mx-auto">
       <div className="mt-10 ">
-        <p className=" text-[#A25D60] font-bold text-[42px]">ภาพผลงาน</p>
+        <p className=" text-[#FFFFFF] font-bold text-[42px]">ภาพผลงาน</p>
         <Marquee
           gradient={false}
           speed={50}
