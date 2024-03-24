@@ -7,6 +7,5 @@ export async function getDentist() {
         throw new Error("Error failed to fetch");
     }
     const data = await response.json()
-    console.log(data)
     return  data;
 }
