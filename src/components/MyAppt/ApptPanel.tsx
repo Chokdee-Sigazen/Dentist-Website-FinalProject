@@ -1,6 +1,6 @@
 import ApptCard , { ApptInfoProps } from "./ApptCard";
 
-const HistoryList: ApptInfoProps[] = [
+const ApptList: ApptInfoProps[] = [
     {
         pastDate: "วันที่ 1"
         , work: "เจาะปาก"
@@ -12,7 +12,7 @@ const HistoryList: ApptInfoProps[] = [
 export default function ApptPanel(){
     return (
         <div className="flex flex-col justify-center w-[80%] mx-auto py-2">
-          {HistoryList.map((card, index) => {
+          {ApptList.map((card, index) => {
             return <ApptCard key={index} {...card} />;
           })}
         </div>
