@@ -9,7 +9,10 @@ export default function AboutUs() {
           <p className="text-[#744143] text-[42px] font-bold">
             รู้จักเรามากขึ้น
           </p>
-          <video className=" h-[75vh] w-full bg-[#B5686B] my-10 rounded-xl"></video>
+          <video className="bg-[#B5686B] my-10 rounded-xl " controls autoPlay muted loop>
+          <source src="/images/video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+          </video>
           <p className="text-[#744143] text-[32px] font-bold text-start">
             ที่อยู่คลินิค
           </p>
