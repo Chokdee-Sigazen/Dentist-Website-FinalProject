@@ -1,3 +1,7 @@
+'use client'
+import { useState } from "react";
+import ChangePasswordPopup from "@/components/Profile/ChangePasswordPopup";
+
 const MockProfile = {
     image: "/images/Patient/review1.png",
     name: "นายสมศักดิ์ อาสาสมัคร",
@@ -6,6 +10,17 @@ const MockProfile = {
 }
 
 export default function profilePage() {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const openPopup = () => {
+        setIsOpen(true);
+    };
+
+    const closePopup = () => {
+        setIsOpen(false);
+    };
+
     return (
         <main className="w-full flex flex-col items-center bg-[#FAE3D9] rounded-md mx-4 my-4 px-4 pt-5 drop-shadow-sm">
             <div className="text-3xl font-bold text-[#895355] pb-5">My Profile</div>
@@ -21,12 +36,14 @@ export default function profilePage() {
                         <button className="bg-[#FFB6B9] rounded-md py-2 px-4 mr-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md">
                             แก้ไข
                         </button>
-                        <button className="bg-[#FFB6B9] rounded-md py-2 px-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md">
+                        <button className="bg-[#FFB6B9] rounded-md py-2 px-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md" 
+                            onClick={openPopup}>
                             เปลี่ยนรหัสผ่าน
                         </button>
                     </div>
                 </div>
             </section>
+            <ChangePasswordPopup isOpen={isOpen} onClose={closePopup}/>
         </main>
     );
 }
