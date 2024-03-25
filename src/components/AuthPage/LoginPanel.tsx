@@ -50,7 +50,7 @@ const LoginPanel = () => {
       </div>
       <button
         name="Submit"
-        className="block rounded-md bg-[#61C0BF] hover:bg-[#346E6D] px-3 py-2 text-white shadow-md"
+        className="block rounded-md bg-[#61C0BF] hover:bg-[#346E6D] px-3 py-2 text-white font-bold drop-shadow-md"
         onClick={handleLogin}
       >
         ลงชื่อเข้าใช้

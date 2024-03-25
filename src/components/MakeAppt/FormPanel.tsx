@@ -6,6 +6,7 @@ import { getDentist } from "@/lib/getDentists";
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { Appointment, Dentist, allArea } from "@/interface";
+import { makeAppointment } from "@/lib/makeAppointment";
 
 export default function FormPanel(){
     const [topic, setTopic] = useState<string|null>(null);
@@ -45,7 +46,14 @@ export default function FormPanel(){
                 createdAt: dayjs().toDate()
             }
             console.log(item);
-            //dispatch(addAppt(item))
+            
+            makeAppointment(item)
+            .then(() => {
+                console.log("Appointment successfully made");
+            })
+            .catch(error => {
+                console.error("Error making appointment:", error);
+            });
         }
     }
 
