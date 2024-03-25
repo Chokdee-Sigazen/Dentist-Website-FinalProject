@@ -6,7 +6,7 @@ export default function Navbar() {
       <Link href="/">
           <img src="/images/logo.png" className="h-[100%] rounded-md drop-shadow-md"></img>
       </Link>
-      <section className="flex space-x-2 text-[8pt] md:text-[10pt] lg:text-[12pt] items-center">
+      <section className="flex space-x-2 text-[9pt] md:text-[11pt] lg:text-[13pt] items-center">
         <Link href="/makeAppointment" className="p-2 text-[#835A5C] font-bold hover:underline">
           Create Appointment
         </Link>
