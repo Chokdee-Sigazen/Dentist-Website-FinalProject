@@ -16,7 +16,7 @@ const SignupPanel = () => {
             <TextField id="Check" name="Check" label="ยืนยันรหัสผ่านอีกครั้ง :" variant="outlined" className="bg-white rounded-sm" required 
                 onChange={(e) => (checkPassword.current = e.target.value)}/>
             <button name="Submit" className="block rounded-md bg-[#61C0BF] 
-                hover:bg-[#346E6D] px-3 py-2 text-white shadow-md">สมัครเลย</button>
+                hover:bg-[#346E6D] px-3 py-2 text-white font-bold drop-shadow-md">สมัครเลย</button>
                 {/*add onclick later*/}
         </div>
     );
