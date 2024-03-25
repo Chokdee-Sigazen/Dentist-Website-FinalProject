@@ -1,6 +1,7 @@
-"use client";
+"use client"
 import { useState } from "react";
 import ChangePasswordPopup from "@/components/Profile/ChangePasswordPopup";
+import EditProfilePopup from "@/components/Profile/EditProfiePopup";
 
 const MockProfile = {
   image: "/images/Patient/review1.png",
@@ -10,15 +11,8 @@ const MockProfile = {
 };
 
 export default function ProfilePage() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openPopup = () => {
-    setIsOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsOpen(false);
-  };
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isPasswordOpen, setIsPasswordOpen] = useState(false);
 
   return (
     <main className="w-full flex flex-col items-center bg-[#FAE3D9] rounded-md mx-4 my-4 px-4 pt-5 drop-shadow-sm">
@@ -36,19 +30,22 @@ export default function ProfilePage() {
             <span className="font-bold">email:</span> {MockProfile.email}
           </div>
           <div className="flex justify-end mt-4 md:mt-0">
-            <button className="bg-[#FFB6B9] rounded-md py-2 px-4 mr-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md">
+            <button 
+                className="bg-[#FFB6B9] rounded-md py-2 px-4 mr-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md"
+                onClick={() => {setIsEditOpen(true);}}>
               แก้ไข
             </button>
             <button
               className="bg-[#FFB6B9] rounded-md py-2 px-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md"
-              onClick={openPopup}
+              onClick={() => {setIsPasswordOpen(true);}}
             >
               เปลี่ยนรหัสผ่าน
             </button>
           </div>
         </div>
       </section>
-      <ChangePasswordPopup isOpen={isOpen} onClose={closePopup} />
+      <ChangePasswordPopup isOpen={isPasswordOpen} onClose={() => {setIsPasswordOpen(false);}} />
+      <EditProfilePopup isOpen={isEditOpen} onClose={() => {setIsEditOpen(false);}} oldData={{name: MockProfile.name, tel: MockProfile.tel}}/>
     </main>
   );
 }
