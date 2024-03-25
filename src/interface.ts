@@ -29,3 +29,5 @@ export interface Appointment //???
     finish: boolean;
     createdAt: Date;
 }
+
+export const allArea = ["ทันตรังสีวิทยา", "จัดฟัน", "ศัลยกรรมช่องปาก", "รักษาโรคเหงือก", "ทำฟันเด็ก", "ทำฟันปลอม"];
