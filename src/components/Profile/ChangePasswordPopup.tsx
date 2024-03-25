@@ -24,7 +24,7 @@ export default function ChangePasswordPopup({isOpen, onClose}:{isOpen : boolean,
                     {
                         notmatch?<div className="text-red-600 text-sm pt-3">*รหัสที่ยืนยันไม่ตรงกัน</div>:null
                     }
-                    <button className="text-gray-500 hover:text-gray-800" onClick={() => onClose()}>X</button>
+                    <button className="text-gray-500 hover:text-gray-800" onClick={() => {setnotmatch(false); onClose();}}>X</button>
                 </div>
                 <div className="bg-[#DCEFE7] text-[18px] font-bold rounded-lg pt-5 pb-3 px-3 space-y-3">
                     <div className="flex flex-row ">
@@ -35,7 +35,7 @@ export default function ChangePasswordPopup({isOpen, onClose}:{isOpen : boolean,
                         <div className="mr-2">ยืนยันรหัสผ่าน :</div>
                         <TextField id="checkPass" name="checkPass" variant="standard" className="w-[60%] bg-white" required onChange={(e) => setCheckPass(e.target.value)}/>
                     </div>
-                    <button className="w-[100%] bg-[#128281] rounded-md text-white text-[18px] font-bold px-2" onClick={updatePassword}>ยืนยัน</button>
+                    <button className="w-[100%] bg-[#128281] rounded-md text-white text-[18px] font-bold px-2" onClick={() => {updatePassword; setnotmatch(false); onClose();}}>ยืนยัน</button>
                 </div>
             </div>
         </div>
