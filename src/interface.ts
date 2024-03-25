@@ -30,4 +30,12 @@ export interface Appointment //???
     createdAt: Date;
 }
 
+export interface RegisterUser{
+    name: string;
+    email: string;
+    tel: string;
+    password: string;
+    confirmPassword: string;
+}
+
 export const allArea = ["ทันตรังสีวิทยา", "จัดฟัน", "ศัลยกรรมช่องปาก", "รักษาโรคเหงือก", "ทำฟันเด็ก", "ทำฟันปลอม"];
