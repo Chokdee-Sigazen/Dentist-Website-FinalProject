@@ -1,26 +1,46 @@
+'use client'
 import { Select, MenuItem } from "@mui/material"
 import { LocalizationProvider, DatePicker, TimePicker} from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useState } from "react";
+import { getDentist } from "@/lib/getDentists";
+import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import { Appointment } from "@/interface";
+import { Appointment, Dentist, allArea } from "@/interface";
 
 export default function FormPanel(){
-
     const [topic, setTopic] = useState<string|null>(null);
-    const [dentist, setDentist] = useState<string|null>(null);
+    const [dentistSelected, setDentist] = useState<string|null>(null);
     const [dateAppt, setDateAppt] = useState<Dayjs|null>(null);
     const [timeAppt, setTimeAppt] = useState<Dayjs|null>(null);
+
+    const [filteredDentists, setFilteredDentists] = useState<Dentist[]>([]);
+
+    useEffect(() => {
+        const fetchDentistData = async () => {
+            try {
+                const allDentist = await getDentist();
+                if(topic){
+                    setFilteredDentists(allDentist.data.filter((x:Dentist) => x.areaOfExpertise.includes(topic))); 
+                }
+                else{setFilteredDentists(allDentist.data);}
+            } catch (error) {
+                console.error('Error fetching dentist data:', error);
+            }
+            
+        };
+        fetchDentistData();
+      }, [topic]);
+    
     //const dispatch = useDispatch<AppDispatch>();
 
     const MakeAppt = () => {
-        if (topic && dentist && dateAppt && timeAppt){
+        if (topic && dentistSelected && dateAppt && timeAppt){
             const combinedDateTime = dateAppt.hour(timeAppt.hour()).minute(timeAppt.minute());
 
             const item: Appointment = {
                 appointmentDate: combinedDateTime.toDate(),
                 user:"",//Add Later
-                dentist: dentist,
+                dentist: dentistSelected,
                 finish: false,
                 createdAt: dayjs().toDate()
             }
@@ -34,14 +54,18 @@ export default function FormPanel(){
             <div className="flex flex-row grid grid-cols-2">
                 หัวข้อ :
                 <Select variant="standard" name="type" id="type" value={topic} className="h[2em]" onChange={(e) => setTopic(e.target.value)}>
-                    <MenuItem value="test1">TestType</MenuItem>
+                    {allArea.map((option) => (
+                        <MenuItem key={option} value={option}>{option}</MenuItem>
+                    ))}
                 </Select>
             </div>
 
             <div className="flex flex-row grid grid-cols-2">
                 หมอ :
-                <Select variant="standard" name="dentist" id="dentist" value={dentist} className="h[2em]" onChange={(e) => setDentist(e.target.value)}>
-                    <MenuItem value="test1">TestDentist</MenuItem>
+                <Select variant="standard" name="dentist" id="dentist" value={dentistSelected} className="h[2em]" onChange={(e) => setDentist(e.target.value)}>
+                {filteredDentists.map((dentist:Dentist) => (
+                    <MenuItem key={dentist.id} value={dentist.id}>{dentist.name}</MenuItem>
+          ))}
                 </Select>
             </div>
 
