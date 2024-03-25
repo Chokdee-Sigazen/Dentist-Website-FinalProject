@@ -9,15 +9,15 @@ export const login: LoginFn = async (email, password) => {
   try {
     await connectDB();
     if (!email || !password) {
-      throw new Error("Please provide email and password");
+      return null
     }
     const user = await User2.findOne({ email }).select("+password");
     if (!user) {
-      throw new Error("Invalid credentails");
+      return null
     }
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
-      throw new Error("Invalid credentails");
+      return null
     }
     NextResponse.json({
       success: true,
