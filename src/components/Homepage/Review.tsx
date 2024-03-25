@@ -50,8 +50,8 @@ export default function Review() {
                     {" "}
                   </div>
                   <div className="ml-8 w-[70%]  ">
-                    <p className="text-[20px] md:text-[24px] font-[600]">{review.name}</p>
-                    <div className="text-[14px] md:text-[16px] font-[500] flex ">
+                    <p className="text-[22px] md:text-[26px] font-[600]">{review.name}</p>
+                    <div className="text-[16px] md:text-[18px] font-[500] flex ">
                       <span className=" text-[25px] mr-2">&#34;</span>
                       <p className="mt-3 line-clamp-4">{review.review}</p>
                     </div>
