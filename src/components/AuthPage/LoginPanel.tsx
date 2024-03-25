@@ -2,7 +2,6 @@
 import React, { useRef } from "react";
 import { TextField } from "@mui/material";
 import Link from "next/link";
-import login from "@/lib/usersLogin"; // Assuming login.ts is in the same directory
 
 const LoginPanel = () => {
   const userEmail = useRef("");
@@ -14,7 +13,7 @@ const LoginPanel = () => {
       const password = userPassword.current;
 
       // Call login function to authenticate user
-      const responseData = await login(username, password);
+      const responseData = "none";
 
       // Assuming login is successful, redirect user to dashboard or any other page
       console.log("User authenticated:", responseData);
