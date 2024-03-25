@@ -29,8 +29,8 @@ export default function Review() {
     <div className="text-[#744143] text-[32px] font-bold text-start mt-16">
       <p>รีวิวจากผู้ใช้งาน</p>
       <section className="flex space-x-2 mt-10 ">
-        <div className=" h-[60vh] w-[35%] bg-[url('/images/doctor2.png')] bg-contain bg-center bg-no-repeat "></div>
-        <div className=" h-[70vh] w-[65%]  ">
+        <div className="hidden md:block h-[60vh] w-[35%] bg-[url('/images/doctor2.png')] bg-contain bg-center bg-no-repeat "></div>
+        <div className=" h-[70vh] w-[100%] md:w-[65%] ">
           <div className=" space-y-5">
             {reviewData.map((review, index) => {
               return (
@@ -50,10 +50,10 @@ export default function Review() {
                     {" "}
                   </div>
                   <div className="ml-8 w-[70%]  ">
-                    <p className="text-[33px] font-[600]">{review.name}</p>
-                    <div className="text-[18px] font-[500] flex">
+                    <p className="text-[18px] md:text-[22px] font-[600]">{review.name}</p>
+                    <div className="text-[12px] md:text-[14px] font-[500] flex ">
                       <span className=" text-[25px] mr-2">&#34;</span>
-                      <p className="mt-3">{review.review}</p>
+                      <p className="mt-3 line-clamp-4">{review.review}</p>
                     </div>
                     <Rating
                       name="read-only"

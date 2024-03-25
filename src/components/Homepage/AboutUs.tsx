@@ -19,7 +19,7 @@ export default function AboutUs() {
           <div className=" h-[80vh] w-full bg-[#B5686B] mt-10 mb-5 rounded-xl">
             <iframe className="rounded-xl"
               width="100%"
-              height="800"
+              height="520"
               title="Clinic Map"
               src={`https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(Your+Business+Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed`}
               />
