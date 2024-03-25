@@ -21,8 +21,6 @@ export async function registerUser(registerUser : RegisterUser): Promise<void> {
             },
             body: JSON.stringify(register)
         });
-        const data = await response.json();
-        console.log(data);
         if (!response.ok) {
             throw new Error("Failed to make appointment");
         }
