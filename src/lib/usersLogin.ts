@@ -1,6 +1,6 @@
 export async function login(username: string, password: string) {
     try {
-        const response = await fetch('https://dentist-website-final-project.vercel.app/api/auth/login', {
+        const response = await fetch('https://dentist-website-final-project.vercel.app/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -13,6 +13,7 @@ export async function login(username: string, password: string) {
 
         if (!response.ok) {
             const errorMessage = await response.text();
+            console.log('Login failed:', errorMessage);
             throw new Error(errorMessage || 'Login failed');
         }
 
