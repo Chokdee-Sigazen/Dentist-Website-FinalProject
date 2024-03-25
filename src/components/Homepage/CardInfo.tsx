@@ -13,7 +13,7 @@ export interface CardInfoProps {
 export default function CardInfo(props: CardInfoProps) {
   return (
     <motion.div
-      className="card h-[23rem] w-[33%] bg-[#f6f6f6] rounded-2xl shadow-xl"
+      className="card h-[25rem] w-[33%] bg-[#f6f6f6] rounded-2xl shadow-xl"
       whileHover={{ y: -7 }}
     >
       <div
@@ -21,9 +21,9 @@ export default function CardInfo(props: CardInfoProps) {
         style={{ backgroundImage: `url(${props.image})` }}
       ></div>
       <div className="w-[87%] mx-auto mt-3">
-        <p className="text-[#835A5C] font-bold text-[15px] md:text-[20px] line-clamp-2">{props.title}</p>
-        <p className=" text-[#B4696D] text-[12px] md:text-[16px] line-clamp-2">{props.subtitle}</p>
-        <p className="text-[#372122] text-[9px] md:text-[12px] mb-4 mt-1 line-clamp-3">
+        <p className="text-[#835A5C] font-bold text-[17px] md:text-[22px] line-clamp-2">{props.title}</p>
+        <p className=" text-[#B4696D] text-[14px] md:text-[18px] line-clamp-2">{props.subtitle}</p>
+        <p className="text-[#372122] text-[11px] md:text-[14px] mb-4 mt-1 line-clamp-3">
           {props.description}
         </p>
         <Link
