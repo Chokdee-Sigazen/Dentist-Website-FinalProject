@@ -25,7 +25,7 @@ export const GET =  async () => {
     }
 }
 
-export const POST = async (req: { body: {name:string,email:string,password:string,tel:string,role:string}; },res: { status: (arg0: NextResponse<unknown>) => { (): any; new(): any; cookie: { (arg0: string, arg1: any, arg2: { expires: Date; httpOnly: boolean; }): { (): any; new(): any; json: { (arg0: { success: boolean; token: any; }): void; new(): any; }; }; new(): any; }; }; }) => {
+export const POST = async (req: any,res:any)=>{
     try{
         await connectDB();
         const user = await User.create({
