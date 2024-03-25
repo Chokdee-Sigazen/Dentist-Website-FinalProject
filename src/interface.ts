@@ -20,3 +20,12 @@ export interface Dentist extends Document{
     areaOfExpertise: string[];
     createdAt?: Date;
 }
+
+export interface Appointment //???
+{
+    appointmentDate: Date;
+    user: string;
+    dentist: string;
+    finish: boolean;
+    createdAt: Date;
+}
