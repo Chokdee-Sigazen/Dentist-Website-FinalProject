@@ -1,35 +1,28 @@
 import connectDB from "@/lib/connectDB";
-import User from "@/models/User";
+import {User} from "next-auth"
+import User2 from "@/models/User";
 import { NextResponse } from "next/server";
 
 
-export const POST = async (req: any, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { success: boolean; msg: string; }): any; new(): any; }; }; }) => {
+type LoginFn = (email: string, password: string)  => Promise<User>;
+
+export const login:LoginFn = async (email,password) => {
     try{
         await connectDB();
-        const body = await req.json();
-        const {email, password} = body;
-
         if(!email || !password) {
-            return res.status(400).json({
-                success: false,
-                msg: 'Please provide an email and password'
-            });
+            throw new Error('Please provide email and password')
         }
-        const user = await User.findOne({email}).select('+password');
+        const user = await User2.findOne({email}).select('+password');
         if(!user) {
-            return res.status(400).json({
-                success: false,
-                msg: 'Invalid credentails'
-            });
+            throw new Error('Invalid credentails')    
         }
         const isMatch = await user.matchPassword(password);
         if(!isMatch) {
-            return res.status(401).json({
-                success: false,
-                msg: 'Invalid credentails'
-            });
+            throw new Error('Invalid credentails')    
         }
-        return NextResponse.json({success: true, login: true, token: user.getSignedJwtToken()})
+        NextResponse.json({success: true, login: true, token: user.getSignedJwtToken()})
+        user.password = ""
+        return user;
     }
     catch(err){
         console.log(err);

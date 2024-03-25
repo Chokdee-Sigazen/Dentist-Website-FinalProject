@@ -1,6 +1,10 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const session = await getServerSession(authOptions);
+
   return (
     <section className="fixed z-50 top-0 left-0 bg-[#FFFFFF] justify-between flex h-14 w-full py-2 px-6">
       <Link href="/">
@@ -28,20 +32,25 @@ export default function Navbar() {
         >
           My Appointment
         </Link>
+        {session ? (
+          <div>Hello {session.user?.email}</div>
+        ) : (
+          <div className=" flex space-x-2">
+            <Link
+              href="/login"
+              className="flex items-center justify-center h-10 p-2 font-bold hover:bg-[#7db4b3] transition-colors duration-200 rounded-full text-white px-5 bg-[#72A3A2]"
+            >
+              Sign In
+            </Link>
 
-        <Link
-          href="/login"
-          className="flex items-center justify-center h-10 p-2 font-bold hover:bg-[#7db4b3] transition-colors duration-200 rounded-full text-white px-5 bg-[#72A3A2]"
-        >
-          Sign In
-        </Link>
-        <p className="font-bold">/</p>
-        <Link
-          href="/signup"
-          className="flex items-center justify-center h-10 p-2 font-bold hover:bg-[#7db4b3] transition-colors duration-200 rounded-full text-white px-5 bg-[#72A3A2]"
-        >
-          Sign up
-        </Link>
+            <Link
+              href="/signup"
+              className="flex items-center justify-center h-10 p-2 font-bold hover:bg-[#7db4b3] transition-colors duration-200 rounded-full text-white px-5 bg-[#72A3A2]"
+            >
+              Sign up
+            </Link>
+          </div>
+        )}
       </section>
     </section>
   );
