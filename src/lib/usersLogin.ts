@@ -1,34 +1,25 @@
-export async function login(username: string, password: string) {
-    try {
-        const response = await fetch('https://dentist-website-final-project.vercel.app/api/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        });
+const fetch = require("node-fetch");
 
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            console.log('Login failed:', errorMessage);
-            throw new Error(errorMessage || 'Login failed');
-        }
-
-        const responseData = await response.json();
-        
-        // Assuming the response contains authentication token or other relevant data
-        const authToken = responseData.token;
-        
-        // Do something with the authentication token, like storing it in local storage or session
-        localStorage.setItem('authToken', authToken);
-
-        console.log('Login successful');
-        return responseData; // Optionally return any additional data from the response
-    } catch (error) {
-        console.error('Login failed:', error);
-        throw error;
+export default async function userLogIn(
+  userEmail: string,
+  userPassword: string
+) {
+  const response = await fetch(
+    "https://dentist-website-final-project.vercel.app/api/login",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        password: userPassword,
+      }),
     }
+  );
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+  return await response.json();
 }
