@@ -1,4 +1,4 @@
-import { Appointment } from "@/interface";
+import { Appointment } from "@/interface"; // Import the Appointment interface from your interface file
 
 export async function makeAppointment(appointmentData: Appointment): Promise<void> {
     try {
