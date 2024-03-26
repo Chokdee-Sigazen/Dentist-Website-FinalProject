@@ -9,6 +9,7 @@ export interface ApptInfoProps {
   dentist: string;
   createdAt: Date;
   finish: boolean;
+  index: number;
 }
 
 export default async function ApptCard(props: ApptInfoProps) {
@@ -24,6 +25,7 @@ export default async function ApptCard(props: ApptInfoProps) {
 
   return (
     <ApptCardMotion
+      index={props.index}
       dentistName={dentistName}
       dentistWork={dentistWork}
       date={date}

@@ -8,6 +8,7 @@ export default function AppCardMotion(props: {
   dentistWork: string;
   dentistName: string;
   createdDate: string;
+  index: number;
 }) {
   const [hide, setHide] = useState(false);
   const handleClick = () => {
@@ -16,7 +17,9 @@ export default function AppCardMotion(props: {
   return (
     <motion.div
       whileHover={{ x: 20 }}
-      className={`w-[100%] h-auto bg-[#FFB6B9] text-[#FFFFFF] rounded-md drop-shadow-md my-2 px-4 py-3 ${
+      className={`w-[100%] h-auto ${
+        props.index % 2 == 0 ? "bg-[#FFB6B9]" : "bg-[#cb9092]"
+      } text-[#FFFFFF] rounded-md drop-shadow-md my-2 px-4 py-3 ${
         hide ? "hidden" : ""
       }`}
     >

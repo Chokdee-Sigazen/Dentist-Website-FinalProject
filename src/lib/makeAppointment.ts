@@ -2,7 +2,7 @@ import { Appointment } from "@/interface"; // Import the Appointment interface f
 
 export async function makeAppointment(appointmentData: Appointment): Promise<void> {
     try {
-        const response = await fetch("https://dentist-website-final-project.vercel.app/api/appointment", {
+        const response = await fetch("http://localhost:3000/api/appointment", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

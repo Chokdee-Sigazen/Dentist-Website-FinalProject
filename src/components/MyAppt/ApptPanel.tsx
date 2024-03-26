@@ -25,7 +25,18 @@ export default async function ApptPanel() {
     return (
       <div className="flex flex-col justify-center w-[80%] mx-auto py-2">
         {appointmentData.map((card, index) => {
-          return <ApptCard key={index} {...card} />;
+          return (
+            <ApptCard
+              key={index}
+              index={index}
+              dentist={card.dentist}
+              appointmentDate={card.appointmentDate}
+              createdAt={card.createdAt}
+              work={card.work}
+              finish={card.finish}
+              user={card.user}
+            />
+          );
         })}
       </div>
     );

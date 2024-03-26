@@ -1,5 +1,6 @@
 import connectDB from "@/lib/connectDB";
 import Appointment from "@/models/Appointment";
+import User from "@/models/User";
 import { NextResponse } from "next/server";
 
 export const GET =  async () => {
@@ -17,12 +18,21 @@ export const POST = async (req,res) => {
     try {
         await connectDB();
         const body = await req.json();
+        console.log("body")
+        console.log(body)
+        const user = await User.findById(body.user);
+        const existedAppointments = await Appointment.find({ user: body.user,finish:false });
+        console.log("role : ",user.role)
+        console.log("existedAppointments : ",existedAppointments.length)
+        if(existedAppointments.length >= 1 && user.role !== "admin"){
+            return NextResponse.error("You have already an appointment")
+        }
         const appointment = await Appointment.create(body);
         console.log("finish")
         return NextResponse.json({success:true,data:appointment})
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ success: false, message: "Cannot create Appointment" });
+        return NextResponse.json({error: err})
     }
 }
 
