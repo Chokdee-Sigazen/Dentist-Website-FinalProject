@@ -13,7 +13,7 @@ export const GET =  async () => {
 }
 
 
-export const POST = async (req ,res) => {
+export const POST = async (req,res) => {
     try {
         await connectDB();
         const body = await req.json();
