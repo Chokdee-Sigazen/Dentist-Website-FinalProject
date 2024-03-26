@@ -1,16 +1,29 @@
 'use client'
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import { updateProfile } from "@/lib/updateProfile";
+
+export type sendProfile = {
+    name?: string,
+    tel?: string,
+    image?: File|null
+};
 
 export default function EditProfilePopup({isOpen, onClose, oldData}:{isOpen : boolean, onClose : Function, oldData:{name: string, tel: string, image: string}}){//Add oldData.image
     const [newName, setNewName] = useState<string>(oldData.name);
     const [newTel, setNewTel] = useState<string>(oldData.tel);
-    // const [newImage, setNewImage] = useState<File|null>(null);
+    const [newImage, setNewImage] = useState<File|null>(null);
 
     if (!isOpen) return null;
 
-    const updateProfile = () => {
-        //Add Something
+    const updateUser = () => {
+        const item:sendProfile = {}
+        if (newName !== oldData.name) {item.name = newName;}
+        if (newTel !== oldData.tel) {item.tel = newTel;}
+        if (newImage !== null) {item.image = newImage;}
+
+        console.log(item);
+        updateProfile(item);
     }
 
     return(
@@ -29,8 +42,14 @@ export default function EditProfilePopup({isOpen, onClose, oldData}:{isOpen : bo
                         <div className="mr-9">เบอร์โทร :</div>
                         <TextField id="newTel" name="newTel" value={newTel} variant="standard" className="w-[60%] bg-white" onChange={(e) => setNewTel(e.target.value)}/>
                     </div>
-                    {/*Add image input here*/}
-                    <button className="w-[100%] bg-[#128281] rounded-md text-white text-[18px] font-bold px-2" onClick={() => {updateProfile; onClose();}}>ยืนยัน</button>
+                    <input type="file" accept="image/*"
+                        onChange={(e) => {
+                            const file = e.target.files && e.target.files[0];
+                            if (file) {
+                                setNewImage(file);
+                            }
+                        }}/>
+                    <button className="w-[100%] bg-[#128281] rounded-md text-white text-[18px] font-bold px-2" onClick={() => {updateUser; onClose();}}>ยืนยัน</button>
                 </div>
             </div>
         </div>
