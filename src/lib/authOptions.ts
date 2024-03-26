@@ -15,6 +15,7 @@ export const authOptions: AuthOptions = {
             if(!credentials)   return null;
             try{
                 const user = await login(credentials.email, credentials.password);
+                console.log(user);
                 return user
             } catch(err){
                 console.error(err);
@@ -28,8 +29,8 @@ export const authOptions: AuthOptions = {
         async jwt({token, user}){
             return {...token, ...user};
         },
-        async session({session, token,user}){
-            session.user = token as any
+        async session({session, token, user}){
+            session.user = token as any;
             return session;
         }
     

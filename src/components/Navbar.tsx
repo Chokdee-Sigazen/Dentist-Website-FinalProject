@@ -33,7 +33,7 @@ export default async function Navbar() {
           My Appointment
         </Link>
         {session ? (
-          <div>Hello {session.user?.email}</div>
+          <div>Hello {session.user.name}</div>
         ) : (
           <div className=" flex space-x-2">
             <Link
