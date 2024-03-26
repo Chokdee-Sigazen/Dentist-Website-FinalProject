@@ -22,9 +22,9 @@ export default function Profile(props: ProfileProps) {
         className="flex flex-col md:flex-row bg-gradient-to-r from-[#fbc3c3] to-[#ffd8d8] rounded-md shadow-lg px-8 py-6 text-[#895355] drop-shadow-sm mx-5 my-5"
         whileHover={{ scale: 1.1 }}
       >
-        <img
-          src={props.image}
-          className="w-40 bg-[#895355] rounded-full h-auto object-cover mx-auto md:mr-8 md:ml-0"
+        <div
+          className="w-40 bg-[#895355] rounded-full bg-cover bg-center bg-no-repeat h-auto object-cover mx-auto md:mr-8 md:ml-0"
+          style={{ backgroundImage: `url(/images/Profile/profile.png)` }}
         />
         <div className="flex flex-col justify-between mx-5 my-2">
           <div className="font-bold text-lg">{props.name}</div>
@@ -33,9 +33,10 @@ export default function Profile(props: ProfileProps) {
             <p className="font-bold">email: {props.email}</p>
           </div>
           <div className="flex justify-start mt-4 md:mt-0">
-            <button 
+            <button
               className="bg-[#FFB6B9] rounded-md py-2 px-4 mr-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md"
-              onClick={()=>setIsEditOpen(true)}>
+              onClick={() => setIsEditOpen(true)}
+            >
               แก้ไข
             </button>
             <button
@@ -47,8 +48,17 @@ export default function Profile(props: ProfileProps) {
           </div>
         </div>
       </motion.section>
-      <EditProfilePopup isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} oldData={{name: props.name, tel: props.tel, image: props.image}}/>
-      <ChangePasswordPopup isOpen={isPasswordOpen} onClose={() => {setIsPasswordOpen(false)}} />
+      <EditProfilePopup
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+        oldData={{ name: props.name, tel: props.tel, image: props.image }}
+      />
+      <ChangePasswordPopup
+        isOpen={isPasswordOpen}
+        onClose={() => {
+          setIsPasswordOpen(false);
+        }}
+      />
     </main>
   );
 }

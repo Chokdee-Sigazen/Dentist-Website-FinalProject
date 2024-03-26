@@ -14,7 +14,10 @@ export default function ProfileTab(props: { name: string }) {
       >
         <div>
           <Menu.Button className="inline-flex w-full justify-center items-center rounded-md px-4 py-2 text-sm font-medium text-white hover:bg-black/10 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
-            <div className="h-6 w-6 bg-zinc-50 rounded-full mr-1"></div>
+            <div
+              className="h-6 w-6 bg-contain bg-center bg-no-repeat rounded-full mr-1"
+              style={{ backgroundImage: `url(/images/Profile/profile.png)` }}
+            ></div>
             {props.name}
             <ChevronDownIcon
               className="-mr-1 ml-2 h-5 w-5 text-violet-200 hover:text-violet-100"
