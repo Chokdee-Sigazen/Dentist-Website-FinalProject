@@ -82,14 +82,19 @@ export default function FormPanel(){
             <div className="flex flex-row items-center grid grid-cols-2">
                 วันที่นัด :
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker className="bg-white" value={dateAppt} onChange={(value) => {setDateAppt(value)}}/>
+                    <DatePicker className="bg-white" value={dateAppt} 
+                        minDate={dayjs()}
+                        onChange={(value) => {setDateAppt(value)}}/>
                 </LocalizationProvider>
             </div>
 
             <div className="flex flex-row items-center grid grid-cols-2">
                 เวลานัด :
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TimePicker className="bg-white" value={timeAppt} onChange={(value) => {setTimeAppt(value)}}/>
+                    <TimePicker className="bg-white" value={timeAppt}
+                        minTime={dayjs().startOf('day').hour(8)}
+                        maxTime={dayjs().startOf('day').hour(20)}
+                        onChange={(value) => {setTimeAppt(value)}}/>
                 </LocalizationProvider>
             </div>
 
