@@ -52,6 +52,7 @@ const SignupPanel = () => {
         id="Password"
         name="Password"
         label="รหัสผ่าน :"
+        type="password"
         variant="outlined"
         className="bg-white rounded-sm"
         required
@@ -61,6 +62,7 @@ const SignupPanel = () => {
         id="ConfirmPassword"
         name="ConfirmPassword"
         label="ยืนยันรหัสผ่านอีกครั้ง :"
+        type="password"
         variant="outlined"
         className="bg-white rounded-sm"
         required
@@ -72,7 +74,12 @@ const SignupPanel = () => {
         className="block rounded-md bg-[#61C0BF] 
                 hover:bg-[#346E6D] px-3 py-2 text-white font-bold drop-shadow-md"
         onClick={() => {
-          registerUser(info);
+          try {
+            registerUser(info);
+            window.location.reload();
+          } catch (e) {
+            console.log(e);
+          }
         }}
       >
         สมัครเลย
