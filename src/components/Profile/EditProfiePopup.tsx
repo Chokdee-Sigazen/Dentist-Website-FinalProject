@@ -29,7 +29,7 @@ export default function EditProfilePopup({isOpen, onClose, oldData}:{isOpen : bo
                         <div className="mr-9">เบอร์โทร :</div>
                         <TextField id="newTel" name="newTel" value={newTel} variant="standard" className="w-[60%] bg-white" onChange={(e) => setNewTel(e.target.value)}/>
                     </div>
-                    {/*Add image inout here*/}
+                    {/*Add image input here*/}
                     <button className="w-[100%] bg-[#128281] rounded-md text-white text-[18px] font-bold px-2" onClick={() => {updateProfile; onClose();}}>ยืนยัน</button>
                 </div>
             </div>
