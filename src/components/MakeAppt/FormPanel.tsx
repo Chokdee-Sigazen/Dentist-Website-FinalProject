@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { Appointment, Dentist, allArea } from "@/interface";
 import { makeAppointment } from "@/lib/makeAppointment";
+import { authOptions } from "@/lib/authOptions";
+import { useSession } from "next-auth/react";
 
 export default function FormPanel(){
     const [topic, setTopic] = useState<string|null>(null);
@@ -32,28 +34,28 @@ export default function FormPanel(){
         fetchDentistData();
       }, [topic]);
     
-    //const dispatch = useDispatch<AppDispatch>();
+    const session = useSession();
 
     const MakeAppt = () => {
         if (topic && dentistSelected && dateAppt && timeAppt){
             const combinedDateTime = dateAppt.hour(timeAppt.hour()).minute(timeAppt.minute());
 
             const item: Appointment = {
-                appointmentDate: combinedDateTime.toDate(),
-                user:"",//Add Later
+                appointmentDate: new Date(dayjs(combinedDateTime.toDate()).toISOString()),
+                user: session.data!.user._doc?._id,
                 dentist: dentistSelected,
                 finish: false,
-                createdAt: dayjs().toDate()
+                createdAt: new Date(Date.now())
             }
             console.log(item);
-            
+
             makeAppointment(item)
-            .then(() => {
-                console.log("Appointment successfully made");
-            })
-            .catch(error => {
-                console.error("Error making appointment:", error);
-            });
+                .then(() => {
+                    alert("Appointment successfully made");
+                })
+                .catch(error => {
+                    alert("Error making appointment: " + error.message);
+                });
         }
     }
 
