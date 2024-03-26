@@ -30,13 +30,16 @@ export interface Appointment //???
     createdAt: Date;
 }
 
-export interface RegisterUser{
+export interface RegisterUser extends DocumentResult<RegisterUser>{
     name: string;
     email: string;
     tel: string;
     password: string;
     confirmPassword: string;
-    _doc:any;
+}
+
+interface DocumentResult<T> {
+    _doc?: T;
 }
 
 export const allArea = ["ทันตรังสีวิทยา", "จัดฟัน", "ศัลยกรรมช่องปาก", "รักษาโรคเหงือก", "ทำฟันเด็ก", "ทำฟันปลอม"];

@@ -78,7 +78,7 @@ const SignupPanel = () => {
             registerUser(info);
             window.location.reload();
           } catch (e) {
-            console.log(e);
+            window.location.reload();
           }
         }}
       >
