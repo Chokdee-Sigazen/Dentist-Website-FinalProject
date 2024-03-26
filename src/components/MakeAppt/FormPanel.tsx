@@ -22,6 +22,7 @@ export default function FormPanel(){
         const fetchDentistData = async () => {
             try {
                 const allDentist = await getDentist();
+
                 if(topic){
                     setFilteredDentists(allDentist.data.filter((x:Dentist) => x.areaOfExpertise.includes(topic))); 
                 }
@@ -33,29 +34,27 @@ export default function FormPanel(){
         };
         fetchDentistData();
       }, [topic]);
-    
-    const session = useSession();
+      const session = useSession();
 
     const MakeAppt = () => {
         if (topic && dentistSelected && dateAppt && timeAppt){
             const combinedDateTime = dateAppt.hour(timeAppt.hour()).minute(timeAppt.minute());
-
             const item: Appointment = {
                 appointmentDate: new Date(dayjs(combinedDateTime.toDate()).toISOString()),
                 user: session.data!.user._doc?._id,
                 dentist: dentistSelected,
                 finish: false,
-                createdAt: new Date(Date.now())
+                createdAt: dayjs().toDate()
             }
             console.log(item);
-
+            
             makeAppointment(item)
-                .then(() => {
-                    alert("Appointment successfully made");
-                })
-                .catch(error => {
-                    alert("Error making appointment: " + error.message);
-                });
+            .then(() => {
+                console.log("Appointment successfully made");
+            })
+            .catch(error => {
+                console.error("Error making appointment:", error);
+            });
         }
     }
 
@@ -82,14 +81,19 @@ export default function FormPanel(){
             <div className="flex flex-row items-center grid grid-cols-2">
                 วันที่นัด :
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker className="bg-white" value={dateAppt} onChange={(value) => {setDateAppt(value)}}/>
+                    <DatePicker className="bg-white" value={dateAppt} 
+                        minDate={dayjs()}
+                        onChange={(value) => {setDateAppt(value)}}/>
                 </LocalizationProvider>
             </div>
 
             <div className="flex flex-row items-center grid grid-cols-2">
                 เวลานัด :
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TimePicker className="bg-white" value={timeAppt} onChange={(value) => {setTimeAppt(value)}}/>
+                    <TimePicker className="bg-white" value={timeAppt}
+                        minTime={dayjs().startOf('day').hour(8)}
+                        maxTime={dayjs().startOf('day').hour(20)}
+                        onChange={(value) => {setTimeAppt(value)}}/>
                 </LocalizationProvider>
             </div>
 
