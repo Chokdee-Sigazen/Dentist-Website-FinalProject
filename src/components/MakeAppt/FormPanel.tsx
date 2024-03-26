@@ -7,7 +7,8 @@ import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { Appointment, Dentist, allArea } from "@/interface";
 import { makeAppointment } from "@/lib/makeAppointment";
-import { getSession } from "next-auth/react";
+import { authOptions } from "@/lib/authOptions";
+import { useSession } from "next-auth/react";
 
 export default function FormPanel(){
     const [topic, setTopic] = useState<string|null>(null);
@@ -33,44 +34,27 @@ export default function FormPanel(){
         };
         fetchDentistData();
       }, [topic]);
+      const session = useSession();
 
-    const MakeAppt = async () => {
+    const MakeAppt = () => {
         if (topic && dentistSelected && dateAppt && timeAppt){
             const combinedDateTime = dateAppt.hour(timeAppt.hour()).minute(timeAppt.minute());
-            try {
-                const session = await getSession();
-                if (!session) {
-                    console.error('User session not found');
-                    return;
-                }
-    
-                const userID = session?.user._doc._id;
-    
-                if (!userID) {
-                    console.error('User not found');
-                    return;
-                }
-
-                const item: Appointment = {
-                    appointmentDate: combinedDateTime.toDate(),
-                    user: userID,
-                    dentist: dentistSelected,
-                    finish: false,
-                    createdAt: dayjs().toDate()
-                }
-                console.log(item);
-                
-                makeAppointment(item)
-                .then(() => {
-                    console.log("Appointment successfully made");
-                })
-                .catch(error => {
-                    console.error("Error making appointment:", error);
-                });
+            const item: Appointment = {
+                appointmentDate: new Date(dayjs(combinedDateTime.toDate()).toISOString()),
+                user: session.data!.user._doc?._id,
+                dentist: dentistSelected,
+                finish: false,
+                createdAt: dayjs().toDate()
             }
-            catch (error) {
-                console.error("Error:", error);
-            }
+            console.log(item);
+            
+            makeAppointment(item)
+            .then(() => {
+                console.log("Appointment successfully made");
+            })
+            .catch(error => {
+                console.error("Error making appointment:", error);
+            });
         }
     }
 
