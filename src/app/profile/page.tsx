@@ -16,7 +16,7 @@ export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
 
   if (session?.user) {
-    const profile = session.user._doc;
+    const profile = session.user;
     console.log(profile);
     if (profile) {
       return <Profile {...profile} />;
