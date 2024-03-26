@@ -36,6 +36,7 @@ export interface RegisterUser{
     tel: string;
     password: string;
     confirmPassword: string;
+    _doc:any;
 }
 
 export const allArea = ["ทันตรังสีวิทยา", "จัดฟัน", "ศัลยกรรมช่องปาก", "รักษาโรคเหงือก", "ทำฟันเด็ก", "ทำฟันปลอม"];
