@@ -1,6 +1,9 @@
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import SignOutButton from "./SignOutButton";
+import ProfileTab from "./ProfileTab";
 
 export default async function Navbar() {
   const session = await getServerSession(authOptions);
@@ -33,7 +36,7 @@ export default async function Navbar() {
           My Appointment
         </Link>
         {session ? (
-          <div>Hello {session.user.name}</div>
+          <ProfileTab name={session.user.name}></ProfileTab>
         ) : (
           <div className=" flex space-x-2">
             <Link
