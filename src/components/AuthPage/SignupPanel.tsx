@@ -77,7 +77,8 @@ const SignupPanel = () => {
           try {
             registerUser(info)
              .then(() => {
-              alert("Registration Successful!"); // Show success message on successful registration
+               alert("Registration Successful!");
+              window.location.reload();
             })
             .catch((e) => {
               alert(e); // Handle errors
