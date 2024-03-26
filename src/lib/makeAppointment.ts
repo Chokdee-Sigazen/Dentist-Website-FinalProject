@@ -15,7 +15,7 @@ export async function makeAppointment(appointmentData: Appointment): Promise<voi
         }
 
     } catch (error) {
-        console.error("Error making appointment:", error);
+        console.error("Error making appointment : ", error);
         throw error;
     }
 }
