@@ -1,5 +1,6 @@
 import { getDentist } from "@/lib/getDentists";
 export interface ApptInfoProps {
+    user: string;
     appointmentDate: string;
     work: string| null;
     dentist : string;
