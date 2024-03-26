@@ -10,6 +10,17 @@ declare module "next-auth" {
             tel:string,
             role: string,
             token: string
+             _doc: {
+                _id: string;
+                name: string;
+                image: string;
+                email: string;
+                tel: string;
+                role: string;
+                password: string; 
+                createdAt: string;
+                __v: number;
+  };
         }
     }
 }
