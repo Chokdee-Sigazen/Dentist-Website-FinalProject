@@ -6,7 +6,7 @@ export  async function getUsers() {
     "https://dentist-website-final-project.vercel.app/api/users"
   );
   if (!response.ok) {
-    throw new Error("Error failed to fetch");
+    throw new Error("Error failed to fetch  ");
   }
 
   return await response.json();
