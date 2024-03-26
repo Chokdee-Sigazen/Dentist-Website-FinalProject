@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { Appointment, Dentist, allArea } from "@/interface";
 import { makeAppointment } from "@/lib/makeAppointment";
+import { getSession } from "next-auth/react";
 
 export default function FormPanel(){
     const [topic, setTopic] = useState<string|null>(null);
@@ -20,6 +21,7 @@ export default function FormPanel(){
         const fetchDentistData = async () => {
             try {
                 const allDentist = await getDentist();
+
                 if(topic){
                     setFilteredDentists(allDentist.data.filter((x:Dentist) => x.areaOfExpertise.includes(topic))); 
                 }
@@ -31,29 +33,44 @@ export default function FormPanel(){
         };
         fetchDentistData();
       }, [topic]);
-    
-    //const dispatch = useDispatch<AppDispatch>();
 
-    const MakeAppt = () => {
+    const MakeAppt = async () => {
         if (topic && dentistSelected && dateAppt && timeAppt){
             const combinedDateTime = dateAppt.hour(timeAppt.hour()).minute(timeAppt.minute());
+            try {
+                const session = await getSession();
+                if (!session) {
+                    console.error('User session not found');
+                    return;
+                }
+    
+                const userID = session?.user._doc._id;
+    
+                if (!userID) {
+                    console.error('User not found');
+                    return;
+                }
 
-            const item: Appointment = {
-                appointmentDate: combinedDateTime.toDate(),
-                user:"",//Add Later
-                dentist: dentistSelected,
-                finish: false,
-                createdAt: dayjs().toDate()
+                const item: Appointment = {
+                    appointmentDate: combinedDateTime.toDate(),
+                    user: userID,
+                    dentist: dentistSelected,
+                    finish: false,
+                    createdAt: dayjs().toDate()
+                }
+                console.log(item);
+                
+                makeAppointment(item)
+                .then(() => {
+                    console.log("Appointment successfully made");
+                })
+                .catch(error => {
+                    console.error("Error making appointment:", error);
+                });
             }
-            console.log(item);
-            
-            makeAppointment(item)
-            .then(() => {
-                console.log("Appointment successfully made");
-            })
-            .catch(error => {
-                console.error("Error making appointment:", error);
-            });
+            catch (error) {
+                console.error("Error:", error);
+            }
         }
     }
 
@@ -80,14 +97,19 @@ export default function FormPanel(){
             <div className="flex flex-row items-center grid grid-cols-2">
                 วันที่นัด :
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker className="bg-white" value={dateAppt} onChange={(value) => {setDateAppt(value)}}/>
+                    <DatePicker className="bg-white" value={dateAppt} 
+                        minDate={dayjs()}
+                        onChange={(value) => {setDateAppt(value)}}/>
                 </LocalizationProvider>
             </div>
 
             <div className="flex flex-row items-center grid grid-cols-2">
                 เวลานัด :
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TimePicker className="bg-white" value={timeAppt} onChange={(value) => {setTimeAppt(value)}}/>
+                    <TimePicker className="bg-white" value={timeAppt}
+                        minTime={dayjs().startOf('day').hour(8)}
+                        maxTime={dayjs().startOf('day').hour(20)}
+                        onChange={(value) => {setTimeAppt(value)}}/>
                 </LocalizationProvider>
             </div>
 
