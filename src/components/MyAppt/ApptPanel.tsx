@@ -12,7 +12,7 @@ export default async function ApptPanel() {
     const id = profile._doc?._id;
 
     let appointments = await getAppointments();
-    console.log(appointments.data);
+    //console.log(appointments.data);
     const appointmentData: ApptInfoProps[] = appointments.data.filter(
       (appointment: ApptInfoProps) => {
         return (

@@ -25,3 +25,23 @@ export const POST = async (req,res) => {
         return res.status(500).json({ success: false, message: "Cannot create Appointment" });
     }
 }
+
+export const DELETE = async (req,res) => {
+    try {
+        await connectDB();
+        const body = await req.json();
+        await Appointment.findOneAndDelete({'_id':body._id}, (err, data) => {
+            if(err){
+                console.log(err);
+                return response.status(500).send();
+            }
+            else{
+                return response.json({data});
+            }
+        })
+        return res.status(200).json({ success: true, data: {} });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ success: false, message: "Cannot delete Appointment" });
+    }
+}
