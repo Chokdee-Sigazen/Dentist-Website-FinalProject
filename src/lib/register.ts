@@ -22,11 +22,11 @@ export async function registerUser(registerUser : RegisterUser): Promise<void> {
             body: JSON.stringify(register)
         });
         if (!response.ok) {
-            throw new Error("Failed to make appointment");
+            throw new Error(response.statusText);
         }
         console.log("Register success")
     } catch (error) {
-        console.error("Error making appointment:", error);
+        console.error("Error making appointment:", error)
         throw error;
     }
 }

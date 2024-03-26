@@ -75,10 +75,15 @@ const SignupPanel = () => {
                 hover:bg-[#346E6D] px-3 py-2 text-white font-bold drop-shadow-md"
         onClick={() => {
           try {
-            registerUser(info);
-            window.location.reload();
-          } catch (e) {
-            window.location.reload();
+            registerUser(info)
+             .then(() => {
+              alert("Registration Successful!"); // Show success message on successful registration
+            })
+            .catch((e) => {
+              alert(e); // Handle errors
+             });
+           } catch (e) {
+             alert(e); // Handle unexpected errors
           }
         }}
       >
