@@ -13,7 +13,7 @@ export const GET =  async () => {
 }
 
 
-export const POST = async (req: { json: () => any; },res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { success: boolean; message: string; }): any; new(): any; }; }; }) => {
+export const POST = async (req ,res) => {
     try {
         await connectDB();
         const body = await req.json();
