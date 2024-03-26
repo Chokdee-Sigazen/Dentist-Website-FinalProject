@@ -10,6 +10,7 @@ export default async function ProfilePage() {
 
   if (session?.user) {
     const profile = session.user;
+    profile.tel = profile._doc?.tel;
     console.log(profile);
     if (profile) {
       return <Profile {...profile} />;
