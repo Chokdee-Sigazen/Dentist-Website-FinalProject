@@ -2,7 +2,7 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 
-export default function EditProfilePopup({isOpen, onClose, oldData}:{isOpen : boolean, onClose : Function, oldData:{name: string, tel: string}}){//Add oldData.image
+export default function EditProfilePopup({isOpen, onClose, oldData}:{isOpen : boolean, onClose : Function, oldData:{name: string, tel: string, image: string}}){//Add oldData.image
     const [newName, setNewName] = useState<string>(oldData.name);
     const [newTel, setNewTel] = useState<string>(oldData.tel);
     // const [newImage, setNewImage] = useState<File|null>(null);

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import ChangePasswordPopup from "./ChangePasswordPopup";
+import EditProfilePopup from "./EditProfiePopup";
 import { motion } from "framer-motion";
 
 type ProfileProps = {
@@ -11,15 +12,8 @@ type ProfileProps = {
 };
 
 export default function Profile(props: ProfileProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openPopup = () => {
-    setIsOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsOpen(false);
-  };
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isPasswordOpen, setIsPasswordOpen] = useState(false);
 
   return (
     <main className="w-[97%] mx-auto min-h-[87vh] flex flex-col items-center bg-[#FAE3D9] rounded-md  my-4 px-4 pt-5 drop-shadow-sm">
@@ -39,19 +33,22 @@ export default function Profile(props: ProfileProps) {
             <p className="font-bold">email: {props.email}</p>
           </div>
           <div className="flex justify-start mt-4 md:mt-0">
-            <button className="bg-[#FFB6B9] rounded-md py-2 px-4 mr-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md">
+            <button 
+              className="bg-[#FFB6B9] rounded-md py-2 px-4 mr-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md"
+              onClick={()=>setIsEditOpen(true)}>
               แก้ไข
             </button>
             <button
               className="bg-[#FFB6B9] rounded-md py-2 px-4 hover:bg-[#FF8C94] transition-colors duration-300 font-bold drop-shadow-md"
-              onClick={openPopup}
+              onClick={() => setIsPasswordOpen(true)}
             >
               เปลี่ยนรหัสผ่าน
             </button>
           </div>
         </div>
       </motion.section>
-      <ChangePasswordPopup isOpen={isOpen} onClose={closePopup} />
+      <EditProfilePopup isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} oldData={{name: props.name, tel: props.tel, image: props.image}}/>
+      <ChangePasswordPopup isOpen={isPasswordOpen} onClose={() => {setIsPasswordOpen(false)}} />
     </main>
   );
 }

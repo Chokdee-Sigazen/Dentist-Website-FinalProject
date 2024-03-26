@@ -12,8 +12,9 @@ export default function ChangePasswordPopup({isOpen, onClose}:{isOpen : boolean,
     const updatePassword = () => {
         if (newPass != checkPass){
             setnotmatch(true);
+            return null;
         }
-        
+        onClose();
     }
 
     return(
@@ -35,7 +36,7 @@ export default function ChangePasswordPopup({isOpen, onClose}:{isOpen : boolean,
                         <div className="mr-2">ยืนยันรหัสผ่าน :</div>
                         <TextField id="checkPass" name="checkPass" variant="standard" className="w-[60%] bg-white" required onChange={(e) => setCheckPass(e.target.value)}/>
                     </div>
-                    <button className="w-[100%] bg-[#128281] rounded-md text-white text-[18px] font-bold px-2" onClick={() => {updatePassword; setnotmatch(false); onClose();}}>ยืนยัน</button>
+                    <button className="w-[100%] bg-[#128281] rounded-md text-white text-[18px] font-bold px-2" onClick={() => {setnotmatch(false); updatePassword();}}>ยืนยัน</button>
                 </div>
             </div>
         </div>
