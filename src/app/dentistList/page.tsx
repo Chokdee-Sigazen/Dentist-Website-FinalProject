@@ -10,7 +10,6 @@ export default async function DentistList() {
       <div className="text-2xl font-bold text-[#895355] font-bolder py-5">
         Dentist List
       </div>
-      <input className="" type="text"></input>
       <DentistPanel DentistList={dentistList.data}></DentistPanel>
     </main>
   );
