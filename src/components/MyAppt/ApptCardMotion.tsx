@@ -23,30 +23,12 @@ export default function AppCardMotion(props: {
   //Edit Data Area
   const [newDate, setNewDate] = useState<Dayjs|null>(dayjs(props.date));
   const [newTime, setNewTime] = useState<Dayjs|null>(dayjs(props.date));
-  const [newTopic, setNewTopic] = useState<string|null>(props.dentistWork);
   const [newDentist, setNewDentist] = useState<string|null>(props.dentistName);
-
-  const [filteredDentists, setFilteredDentists] = useState<Dentist[]>([]);
-
-  useEffect(() => {
-    const fetchDentistData = async () => {
-      if (newTopic) {
-        setFilteredDentists(
-          props.allDentist.data.filter((x: Dentist) =>
-            x.areaOfExpertise.includes(newTopic)
-          )
-        );
-      } else {
-        setFilteredDentists(props.allDentist.data);
-      }
-    };
-    fetchDentistData();
-  }, [newTopic]);
 
   const session = useSession();
 
   const updateAppt = () => {
-    if (!newTopic || !newDentist || !newDate || !newTime) {
+    if (!newDentist || !newDate || !newTime) {
       alert('Please fill all the boxes before submit');
       return;
     }
@@ -152,8 +134,6 @@ export default function AppCardMotion(props: {
                   <TimePicker
                     className="bg-white"
                     value={newTime}
-                    minTime={dayjs().startOf("day").hour(8)}
-                    maxTime={dayjs().startOf("day").hour(20)}
                     onChange={(value) => {
                       setNewTime(value);
                     }}
@@ -161,21 +141,7 @@ export default function AppCardMotion(props: {
                 </LocalizationProvider>
               </div>
               <div className="flex items-center">
-                <span className="mr-3">หัวข้อ : </span>
-                <Select
-                  variant="standard"
-                  name="type"
-                  id="type"
-                  value={newTopic}
-                  className="bg-white w-[64%] pl-2"
-                  onChange={(e) => setNewTopic(e.target.value)}
-                >
-                  {allArea.map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </Select>
+                <span className="mr-3">หัวข้อ : </span> {props.dentistWork}
               </div>
               <div className="flex items-center">
                 <span className="mr-5">หมอ : </span>
@@ -187,7 +153,7 @@ export default function AppCardMotion(props: {
                   className="bg-white w-[64%] pl-2"
                   onChange={(e) => setNewDentist(e.target.value)}
                 >
-                  {filteredDentists.map((dentist: Dentist) => (
+                  {props.allDentist.data.map((dentist: Dentist) => (
                     <MenuItem key={dentist.id} value={dentist.id}>
                       {dentist.name}
                     </MenuItem>
