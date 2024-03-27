@@ -30,6 +30,7 @@ export default async function ApptCard(props: ApptInfoProps) {
       dentistWork={dentistWork}
       date={date}
       createdDate={createdDate}
+      allDentist = {dentistData}
     ></ApptCardMotion>
   );
 }
