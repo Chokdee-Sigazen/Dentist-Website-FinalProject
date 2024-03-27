@@ -1,12 +1,14 @@
 "use client";
 import { Dentist } from "@/interface";
+import { motion } from "framer-motion";
 
 export default function DentistBlock(props: {
   Dentist: Dentist;
   index: number;
 }) {
   return (
-    <div
+    <motion.div
+      whileHover={{ x: 20 }}
       className={`w-[100%] h-[20vh] ${
         props.index % 2 == 0
           ? "bg-[#F1C2C4] text-[#895355] bg-gradient-to-r from-[#ffdddf]"
@@ -31,6 +33,6 @@ export default function DentistBlock(props: {
           </span>{" "}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
