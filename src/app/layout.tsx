@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
+import Footer from "@/components/Footer";
 
 const anuphan = Anuphan({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default async function RootLayout({
           <Navbar></Navbar>
           <div className="h-14"></div>
           {children}
+          <Footer></Footer>
         </NextAuthProvider>
       </body>
     </html>
