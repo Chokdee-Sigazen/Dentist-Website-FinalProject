@@ -1,20 +1,23 @@
 "use client";
 import { deleteAppointment } from "@/lib/deleteAppt";
+import { updateAppointment } from "@/lib/updateAppointment"
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Select, MenuItem } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker, TimePicker } from "@mui/x-date-pickers";
-import dayjs, { Dayjs }from "dayjs";
-import { Appointment, Dentist, allArea } from "@/interface";
+import dayjs, { Dayjs } from "dayjs";
+import { Appointment, Dentist } from "@/interface";
 import { useSession } from "next-auth/react";
 
 export default function AppCardMotion(props: {
   date: string;
   dentistWork: string;
   dentistName: string;
-  createdDate: string;
+  dentistId: string;
+  createdDate: Date;
   index: number;
+  user: string;
   allDentist: any;
 }) {
   const [hide, setHide] = useState(false);
@@ -23,7 +26,7 @@ export default function AppCardMotion(props: {
   //Edit Data Area
   const [newDate, setNewDate] = useState<Dayjs|null>(dayjs(props.date));
   const [newTime, setNewTime] = useState<Dayjs|null>(dayjs(props.date));
-  const [newDentist, setNewDentist] = useState<string|null>(props.dentistName);
+  const [newDentist, setNewDentist] = useState<string>(props.dentistId);
 
   const session = useSession();
 
@@ -47,18 +50,34 @@ export default function AppCardMotion(props: {
     };
     console.log(item);
 
-      // updateAppointment(item)
-      //   .then(() => {
-      //     alert("Appointment successfully changed");
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //     alert("Error changing appointment: " + error.message);
-      //   });
+    updateAppointment(item)
+      .then(() => {
+        alert("Appointment successfully changed");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error changing appointment: " + error.message);
+      });
   };
 
   const DeleteClick = () => {
-    setHide(true);
+    const item: Appointment = {
+      appointmentDate: new Date (props.date),
+      user: props.user,
+      dentist: props.dentistId,
+      finish: false,
+      createdAt: new Date(Date.now()),
+    };
+    console.log(item);
+
+    deleteAppointment(item)
+      .then(() => {
+        alert("Appointment successfully deleted");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error deleting appointment: " + error.message);
+      });
   };
   return (
       <motion.div
@@ -176,7 +195,12 @@ export default function AppCardMotion(props: {
               <span className="font-bold">หมอ : </span>
               {props.dentistName} <br></br>
               <span className="font-bold">สร้างเมื่อ : </span>
-              {props.createdDate} <br></br>
+              {props.createdDate.toLocaleString()} <br></br>
+              {
+                session.data?.user.role == "admin"
+                ?<div><span className="font-bold">สร้างโดย : </span>{props.user} <br></br></div>
+                :null
+              }
             </div>
           </div>
         }

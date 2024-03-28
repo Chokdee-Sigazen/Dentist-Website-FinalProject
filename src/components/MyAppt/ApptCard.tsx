@@ -20,16 +20,20 @@ export default async function ApptCard(props: ApptInfoProps) {
   const dentistWork = dentistData.data.find(
     (dentist: { id: string }) => dentist.id === props.dentist
   )?.areaOfExpertise;
-  const date = new Date(props.appointmentDate).toLocaleString();
-  const createdDate = new Date(props.createdAt).toLocaleString();
+  const dentistId = props.dentist;
+  const date = props.appointmentDate;
+  const createdDate = props.createdAt;
+  const user = props.user;
 
   return (
     <ApptCardMotion
       index={props.index}
       dentistName={dentistName}
       dentistWork={dentistWork}
+      dentistId = {dentistId}
       date={date}
       createdDate={createdDate}
+      user={user}
       allDentist = {dentistData}
     ></ApptCardMotion>
   );
