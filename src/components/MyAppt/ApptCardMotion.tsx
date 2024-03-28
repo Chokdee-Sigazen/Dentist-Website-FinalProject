@@ -218,8 +218,8 @@ export default function AppCardMotion(props: {
           </div>
 
           :<div>
-            <div className="text-[16pt] sm:text-[18pt] md:text-[20pt] font-bold">
-              นัดที่กำลังจะมาถึง : {props.date}
+            <div className="w-[90%] text-[16pt] sm:text-[18pt] md:text-[20pt] font-bold">
+              นัดที่กำลังจะมาถึง : {new Date(props.date).toLocaleString()}
             </div>
             <div className="pl-5 text-[13pt] sm:text-[15pt] md:text-[18pt]">
               <span className="font-bold">หัวข้อ : </span>
@@ -229,7 +229,7 @@ export default function AppCardMotion(props: {
               <span className="font-bold">สร้างเมื่อ : </span>
               {props.createdDate.toLocaleString()} <br></br>
               {
-                session.data?.user.role == "admin"
+                session.data?.user._doc.role == "admin"
                 ?<div><span className="font-bold">สร้างโดย : </span>{props.user} <br></br></div>
                 :null
               }
