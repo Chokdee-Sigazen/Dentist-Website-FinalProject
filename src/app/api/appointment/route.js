@@ -42,16 +42,23 @@ export const PUT = async (req,res) => {
         const body = await req.json();
         console.log("body")
         console.log(body)
-        const TargetedAppointments = await Appointment.findByIdAndUpdate(body.appointmentId);//Fix me if it's bugged
+        const TargetedAppointments = await Appointment.findByIdAndUpdate(body.appointmentId, {//Maybe wrong here
+            appointmentDate: body.appointmentDate,
+            user: body.user,
+            dentist: body.dentist,
+            createdAt: body.createdAt,
+            finish: body.finish
+        }, function (err, docs) { 
+            if (err){ 
+                console.log(err) 
+            } 
+            else{ 
+                console.log("Updated Appt : ", docs); 
+            } 
+        });//Fix me if it's bugged
         if(TargetedAppointments.length < 1){
             return NextResponse.error("Cant find appointment")
         }
-        //Maybe wrong I dont know
-        TargetedAppointments.appointmentDate = body.appointmentDate;
-        TargetedAppointments.user = body.user;
-        TargetedAppointments.dentist = body.dentist;
-        TargetedAppointments.createdAt = body.createdAt;
-        TargetedAppointments.finish = body.finish;
         console.log(TargetedAppointments);
         console.log("finish")
         return NextResponse.json({success:true,data:appointment})
