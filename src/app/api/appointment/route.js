@@ -42,7 +42,7 @@ export const PUT = async (req,res) => {
         const body = await req.json();
         console.log("body")
         console.log(body)
-        const TargetedAppointments = await Appointment.findByIdAndUpdate({body.appointmentId});//Fix me if it's bugged
+        const TargetedAppointments = await Appointment.findByIdAndUpdate(body.appointmentId);//Fix me if it's bugged
         if(TargetedAppointments.length < 1){
             return NextResponse.error("Cant find appointment")
         }
@@ -65,7 +65,7 @@ export const DELETE = async (req,res) => {
     try {
         await connectDB();
         const body = await req.json();
-        await Appointment.findOneAndDelete({'_id':body._id}, (err, data) => {
+        await Appointment.findOneAndDelete({'_id':body.appointmentId}, (err, data) => {
             if(err){
                 console.log(err);
                 return response.status(500).send();
