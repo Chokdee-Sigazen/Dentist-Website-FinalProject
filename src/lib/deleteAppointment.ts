@@ -1,10 +1,10 @@
 import { Appointment } from "@/interface"; // Import the Appointment interface from your interface file
 import { getAppointments } from "./getAppointments";
 
-export async function updateAppointment(ApptData: Appointment): Promise<void> {
+export async function deleteAppointment(ApptData: Appointment): Promise<void> {
     try {
         const allAppt = await getAppointments();
-        const ApptID = allAppt.find(ApptData)._id;
+        const ApptID = allAppt.find(ApptData)._id;//Maybe wrong
         if(!ApptID){console.error("Cant find ID");}
         console.log(ApptID);
         const response = await fetch("https://dentist-website-final-project.vercel.app/api/appointment", {
