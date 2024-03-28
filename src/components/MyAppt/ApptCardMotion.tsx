@@ -2,12 +2,12 @@
 import { deleteAppointment } from "@/lib/deleteAppt";
 import { updateAppointment } from "@/lib/updateAppointment"
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Select, MenuItem } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker, TimePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
-import { Appointment, Dentist } from "@/interface";
+import { Appointment, Dentist, allArea } from "@/interface";
 import { useSession } from "next-auth/react";
 
 export default function AppCardMotion(props: {
@@ -26,12 +26,30 @@ export default function AppCardMotion(props: {
   //Edit Data Area
   const [newDate, setNewDate] = useState<Dayjs|null>(dayjs(props.date));
   const [newTime, setNewTime] = useState<Dayjs|null>(dayjs(props.date));
+  const [newTopic, setNewTopic] = useState<string|null>(props.dentistWork);
   const [newDentist, setNewDentist] = useState<string>(props.dentistId);
+
+  const [filteredDentists, setFilteredDentists] = useState<Dentist[]>([]);
+
+  useEffect(() => {
+    const fetchDentistData = async () => {
+      if (newTopic) {
+        setFilteredDentists(
+          props.allDentist.data.filter((x: Dentist) =>
+            x.areaOfExpertise.includes(newTopic)
+          )
+        );
+      } else {
+        setFilteredDentists(props.allDentist.data);
+      }
+    };
+    fetchDentistData();
+  }, [newTopic]);
 
   const session = useSession();
 
   const updateAppt = () => {
-    if (!newDentist || !newDate || !newTime) {
+    if (!newTopic || !newDentist || !newDate || !newTime) {
       alert('Please fill all the boxes before submit');
       return;
     }
@@ -160,7 +178,21 @@ export default function AppCardMotion(props: {
                 </LocalizationProvider>
               </div>
               <div className="flex items-center">
-                <span className="mr-3">หัวข้อ : </span> {props.dentistWork}
+                <span className="mr-3">หัวข้อ : </span>
+                <Select
+                  variant="standard"
+                  name="type"
+                  id="type"
+                  value={newTopic}
+                  className="bg-white w-[64%] pl-2"
+                  onChange={(e) => setNewTopic(e.target.value)}
+                >
+                  {allArea.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </Select>
               </div>
               <div className="flex items-center">
                 <span className="mr-5">หมอ : </span>
@@ -172,7 +204,7 @@ export default function AppCardMotion(props: {
                   className="bg-white w-[64%] pl-2"
                   onChange={(e) => setNewDentist(e.target.value)}
                 >
-                  {props.allDentist.data.map((dentist: Dentist) => (
+                  {filteredDentists.map((dentist: Dentist) => (
                     <MenuItem key={dentist.id} value={dentist.id}>
                       {dentist.name}
                     </MenuItem>
