@@ -4,7 +4,7 @@ import { getByTestId, render } from "@testing-library/react";
 
 jest.mock("next-auth/react");
 
-describe('SignInPage Component', () => {
+describe('SignUpPage Component', () => {
     it('should renders sign up form', async () => {
         const { getByText, getByTestId } = render(<SignInPage />);
         expect(getByText('Sign Up')).toBeInTheDocument();
