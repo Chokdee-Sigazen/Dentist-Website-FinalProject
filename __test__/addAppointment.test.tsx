@@ -52,7 +52,7 @@ describe("SignInPage Component", () => {
     );
   });
 
-  it("should throw error when failed to create appointment", async () => {
+  it("should throw error when failed to create appointment when user id wrong", async () => {
     const mockFetch = jest.fn().mockResolvedValue({ ok: false });
     global.fetch = mockFetch;
 
@@ -64,6 +64,26 @@ describe("SignInPage Component", () => {
       ),
       user: "no one",
       dentist: "65e3ae8f9c6077e4106d99c2",
+      finish: false,
+      createdAt: new Date(Date.now()),
+    };
+
+    await expect(makeAppointment(AppointmentDataTest)).rejects.toThrow(
+      "Failed to make appointment"
+    );
+  });
+  it("should throw error when failed to create appointment when dentist id wrong", async () => {
+    const mockFetch = jest.fn().mockResolvedValue({ ok: false });
+    global.fetch = mockFetch;
+
+    const combindedDateTime = dayjs("2022-12-12T12:00:00.000Z");
+
+    const AppointmentDataTest = {
+      appointmentDate: new Date(
+        dayjs(combindedDateTime.toDate()).toISOString()
+      ),
+      user: "65e4d7ad0417954f9aa5e869",
+      dentist: "no one",
       finish: false,
       createdAt: new Date(Date.now()),
     };
