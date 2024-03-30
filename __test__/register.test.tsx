@@ -1,55 +1,49 @@
-import { registerUser } from "@/lib/register"; 
-import { signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { registerUser } from "@/lib/register";
+import SignInPage from "@/app/signup/page";
+import { getByTestId, render } from "@testing-library/react";
 
-// Mock the useRouter hook
-jest.mock("next/router", () => ({
-  __esModule: true,
-  useRouter: jest.fn(),
-}));
-
-// Mock the useSession hook
 jest.mock("next-auth/react");
 
 describe('SignInPage Component', () => {
-  test('registers user and login successfully', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({ ok: true });
-    global.fetch = mockFetch; 
+    it('should renders sign up form', async () => {
+        const { getByText, getByTestId } = render(<SignInPage />);
+        expect(getByText('Sign Up')).toBeInTheDocument();
+        expect(getByTestId('Name')).toBeInTheDocument();
+        expect(getByTestId('Email')).toBeInTheDocument();
+        expect(getByTestId('Tel')).toBeInTheDocument();
+        expect(getByTestId('Password')).toBeInTheDocument();
+        expect(getByTestId('ConPass')).toBeInTheDocument();
+        expect(getByText('สมัครเลย')).toBeInTheDocument();
+      });
+    
 
-    const RegisterDataTest = {
-      name: 'Tester',
-      email: 'tester@example.com',
-      tel: '0123456789',
-      password: '123456789',
-      confirmPassword: '123456789',
-    };
+    it('should registers user and login successfully', async () => {
+        const mockFetch = jest.fn().mockResolvedValue({ ok: true });
+        global.fetch = mockFetch; 
 
-    await registerUser(RegisterDataTest);
+        const RegisterDataTest = {
+            name: 'Tester',
+            email: 'tester@example.com',
+            tel: '0123456789',
+            password: '123456789',
+            confirmPassword: '123456789',
+        };
 
-    // Mock the useRouter function to return a push function
-    const pushMock = jest.fn();
-    (useRouter as jest.Mock).mockReturnValue({
-      push: pushMock,
-    });
+        await registerUser(RegisterDataTest);
 
-    const LoginDataTest = {
-      email : RegisterDataTest.email,
-      password : RegisterDataTest.password
-    }
-
-    // Call the signIn function
-    await signIn("credentials", {
-      email: LoginDataTest.email,
-      password: LoginDataTest.password,
-      retdirect: true,
-      callbackUrl: "https://dentist-website-final-project.vercel.app/",
-    });
-
-    // Assert that useRouter.push is called with the expected URL
-    expect(pushMock).toHaveBeenCalledWith("/");
-
-    // Check if the router push function was called with the expected URL
-    expect(pushMock).toHaveBeenCalledWith("/expected-url");
-  });
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith('https://dentist-website-final-project.vercel.app/api/users', {
+            mode: "no-cors",    
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: RegisterDataTest.name,
+                email: RegisterDataTest.email,
+                tel: RegisterDataTest.tel,
+                password: RegisterDataTest.password
+            })
+        })
+    })
 });

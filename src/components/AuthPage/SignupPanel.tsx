@@ -22,6 +22,7 @@ const SignupPanel = () => {
         <p>{info.tel}</p>
       </div> */}
       <TextField
+        data-testid="Name"
         id="Name"
         name="Name"
         label="ชื่อ :"
@@ -31,6 +32,7 @@ const SignupPanel = () => {
         onChange={(e) => setinfo({ ...info, name: e.target.value })}
       />
       <TextField
+        data-testid="Email"
         id="Email"
         name="Email"
         label="อีเมล :"
@@ -40,6 +42,7 @@ const SignupPanel = () => {
         onChange={(e) => setinfo({ ...info, email: e.target.value })}
       />
       <TextField
+        data-testid="Tel"
         id="Telephone"
         name="Telephone"
         label="เบอร์โทรศัพท์ :"
@@ -49,6 +52,7 @@ const SignupPanel = () => {
         onChange={(e) => setinfo({ ...info, tel: e.target.value })}
       />
       <TextField
+        data-testid="Password"
         id="Password"
         name="Password"
         label="รหัสผ่าน :"
@@ -59,6 +63,7 @@ const SignupPanel = () => {
         onChange={(e) => setinfo({ ...info, password: e.target.value })}
       />
       <TextField
+        data-testid="ConPass"
         id="ConfirmPassword"
         name="ConfirmPassword"
         label="ยืนยันรหัสผ่านอีกครั้ง :"
