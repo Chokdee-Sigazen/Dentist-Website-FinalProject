@@ -80,7 +80,7 @@ export default function FormPanel() {
           variant="standard"
           name="type"
           id="type"
-          value={topic}
+          value={topic == null ? "" : topic}
           className="h[2em]"
           onChange={(e) => setTopic(e.target.value)}
         >
@@ -98,9 +98,10 @@ export default function FormPanel() {
           variant="standard"
           name="dentist"
           id="dentist"
-          value={dentistSelected}
+          value={dentistSelected == null ? "" : dentistSelected}
           className="h[2em]"
           onChange={(e) => setDentist(e.target.value)}
+          required
         >
           {filteredDentists.map((dentist: Dentist) => (
             <MenuItem key={dentist.id} value={dentist.id}>
@@ -115,7 +116,7 @@ export default function FormPanel() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             className="bg-white"
-            value={dateAppt}
+            value={dateAppt == null ? dayjs() : dateAppt}
             minDate={dayjs()}
             onChange={(value) => {
               setDateAppt(value);
@@ -129,7 +130,7 @@ export default function FormPanel() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <TimePicker
             className="bg-white"
-            value={timeAppt}
+            value={timeAppt == null ? dayjs() : timeAppt}
             minTime={dayjs().startOf("day").hour(8)}
             maxTime={dayjs().startOf("day").hour(20)}
             onChange={(value) => {
