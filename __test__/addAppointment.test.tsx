@@ -6,7 +6,7 @@ import { makeAppointment } from "@/lib/makeAppointment";
 
 jest.mock("next-auth/react");
 
-describe("SignInPage Component", () => {
+describe("Appointment Component", () => {
   it("should renders Appointment form", async () => {
     const { getByText, getByTestId } = render(<FormPanel />);
     expect(getByText("หัวข้อ :")).toBeInTheDocument();
