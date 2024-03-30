@@ -94,7 +94,6 @@ const SignupPanel = () => {
       >
         สมัครเลย
       </button>
-      {/*add onclick later*/}
     </div>
   );
 };
