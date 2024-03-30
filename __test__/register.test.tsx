@@ -17,7 +17,7 @@ describe('SignInPage Component', () => {
       });
     
 
-    it('should registers user and login successfully', async () => {
+    it('should registers user successfully', async () => {
         const mockFetch = jest.fn().mockResolvedValue({ ok: true });
         global.fetch = mockFetch; 
 
