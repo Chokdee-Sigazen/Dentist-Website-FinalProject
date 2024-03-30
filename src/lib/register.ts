@@ -7,8 +7,7 @@ export async function registerUser(registerUser : RegisterUser): Promise<void> {
             name: registerUser.name,
             email: registerUser.email,
             tel: registerUser.tel,
-            password: registerUser.password,
-            
+            password: registerUser.password
         }
         if(register.password !== registerUser.confirmPassword){
             throw new Error("Password and Confirm Password do not match");
@@ -26,7 +25,7 @@ export async function registerUser(registerUser : RegisterUser): Promise<void> {
         }
         console.log("Register success")
     } catch (error) {
-        console.error("Error making appointment:", error)
+        console.error("Error making registration:", error)
         throw error;
     }
 }

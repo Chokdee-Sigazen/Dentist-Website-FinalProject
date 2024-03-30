@@ -75,6 +75,10 @@ const SignupPanel = () => {
                 hover:bg-[#346E6D] px-3 py-2 text-white font-bold drop-shadow-md"
         onClick={() => {
           try {
+            if (info.email == "" || info.password == "" || info.confirmPassword == "" || info.name == "" || info.tel == ""){
+              alert("Please fill all the boxes before submit");
+              return;
+            }
             registerUser(info)
              .then(() => {
                alert("Registration Successful!");
